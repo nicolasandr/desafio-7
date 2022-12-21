@@ -2,10 +2,8 @@ import knexConection from '../client/knexConection.js';
 
 (async () => {
     try {
-        console.log('inicializing migrate script...');
         await knexConection.schema.dropTableIfExists('products');
         await knexConection.schema.dropTableIfExists('messages');
-
         await knexConection.schema.createTable('products', (table) => {
             table.increments('id').primary();
             table.string('productName').notNullable();
@@ -20,7 +18,6 @@ import knexConection from '../client/knexConection.js';
     } catch (error) {
         console.log(error);
     } finally {
-        console.log('finalizing migrate script...');
         knexConection.destroy();
     }
 })();
